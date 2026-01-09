@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Barber</title>
+    <link rel="stylesheet" href="Assets/Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Faixa de Horários -->
+    <div class="horario-bar">
+        <p>Funcionamento: Segunda a Sábado - 08:00 às 19:00 | Domingo - Fechado</p>
+    </div>
+
+    <header class="header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="logo">
+                <img src="Assets/img/logo.png" alt="Model Barber Logo">
+            </div>
+
+            <!-- Navegação Principal -->
+            <nav class="nav-links">
+                <a href="#inicial" class="nav-btn">Inicio</a>
+                <a href="#agende" class="nav-btn">Agende aqui</a>
+                
+                <a href="#contatos" class="nav-btn contact-btn">Contatos</a>
+            </nav>
+
+            <!-- Botões de Autenticação -->
+            <div class="auth-buttons">
+                <button class="btn-cadastro">Cadastre-se</button>
+                <button class="btn-login">Login</button>
+            </div>
+
+            <!-- Perfil do Cliente (visível quando logado) -->
+            <div class="perfil-cliente" id="perfilCliente" style="display: none;">
+                <button class="btn-perfil" id="btnPerfil">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="nomeUsuarioPerfil"></span>
+                </button>
+            </div>
+
+            <!-- Botão Hamburger Menu -->
+            <button class="hamburger" id="hamburgerBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Menu Lateral -->
+    <nav class="sidebar-menu" id="sidebarMenu">
+        <a href="#inicial" class="sidebar-link">Inicio</a>
+        <a href="#agende" class="sidebar-link">Agende aqui</a>
+        <a href="#horarios" class="sidebar-link">Horários</a>
+        <a href="#contatos" class="sidebar-link contact-btn">Contatos</a>
+        <div class="sidebar-auth">
+            <button class="btn-sidebar-cadastro">Cadastre-se</button>
+            <button class="btn-sidebar-login">Login</button>
+        </div>
+    </nav>
+
+    <!-- Overlay para fechar menu -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Notificação de Contatos -->
+    <div class="notification" id="notificationContact">
+        <div class="notification-content">
+            <h3>Contatos</h3>
+            <p>Desculpe, nenhum contato foi cadastrado ainda.</p>
+            <button class="notification-close" id="closeNotification">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Seção Quem Somos -->
+    <section id="inicial" class="hero-section active">
+        <img src="Assets/img/barbearia.webp" alt="Barbearia Model Barber" class="hero-image">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Quem Somos</h1>
+            <p>
+                A Model Barber é uma barbearia moderna que oferece os melhores serviços de corte e barbear da região. 
+                Contamos com profissionais experientes e dedicados a proporcionar uma experiência única e confortável para cada cliente. 
+                Nosso barbeiro Andreik é especialista em diversos estilos de corte, desde os clássicos até as tendências mais modernas. 
+                Com mais de 10 anos de experiência, Andreik se dedica a compreender o estilo de cada cliente e transformar sua visão em realidade. 
+                Na Model Barber, você não apenas recebe um corte de cabelo, mas uma experiência de excelência em beleza masculina.
+            </p>
+            <a href="#agende" class="btn-agende-corte">Agende seu corte</a>
+        </div>
+    </section>
+
+    <!-- Seção Agendamento -->
+    <section id="agende" class="agendamento-section">
+        <img src="Assets/img/barbearia.webp" alt="Barbearia Model Barber" class="agendamento-image">
+        <div class="agendamento-overlay"></div>
+        
+        <div class="agendamento-container">
+            <h2>Selecione seus Serviços</h2>
+            
+            <div class="servicos-grid">
+                <div class="servico-card">
+                    <h3>Corte Clássico</h3>
+                    <p>Corte tradicional com finalização perfeita</p>
+                    <button class="btn-selecionar" data-servico="Corte Clássico">Selecionar</button>
+                </div>
+
+                <div class="servico-card">
+                    <h3>Corte Moderno</h3>
+                    <p>Corte com designs e tendências atuais</p>
+                    <button class="btn-selecionar" data-servico="Corte Moderno">Selecionar</button>
+                </div>
+
+                <div class="servico-card">
+                    <h3>Barba Completa</h3>
+                    <p>Aparagem e modelagem de barba</p>
+                    <button class="btn-selecionar" data-servico="Barba Completa">Selecionar</button>
+                </div>
+
+                <div class="servico-card">
+                    <h3>Corte + Barba</h3>
+                    <p>Corte e barba em um único atendimento</p>
+                    <button class="btn-selecionar" data-servico="Corte + Barba">Selecionar</button>
+                </div>
+
+                <div class="servico-card">
+                    <h3>Tintura de Barba</h3>
+                    <p>Coloração profissional para sua barba</p>
+                    <button class="btn-selecionar" data-servico="Tintura de Barba">Selecionar</button>
+                </div>
+
+                <div class="servico-card">
+                    <h3>Limpeza Facial</h3>
+                    <p>Limpeza e hidratação do rosto</p>
+                    <button class="btn-selecionar" data-servico="Limpeza Facial">Selecionar</button>
+                </div>
+            </div>
+
+            <div class="servicos-selecionados">
+                <h3>Serviços Selecionados:</h3>
+                <ul id="lista-servicos">
+                    <li>Nenhum serviço selecionado</li>
+                </ul>
+            </div>
+
+            <button class="btn-confirmar-agendamento" id="btnConfirmarAgendamento">Confirmar Agendamento</button>
+        </div>
+    </section>
+
+    <!-- Seção Horários -->
+    <section id="horarios" class="horarios-section">
+        <div class="horarios-container">
+            <h2>Selecione uma Data</h2>
+            
+            <div class="datas-grid" id="datasGrid">
+                <!-- As datas serão geradas por JavaScript -->
+            </div>
+
+            <div id="horariosContainer" class="horarios-display" style="display: none;">
+                <h3 id="dataSelecionadaInfo"></h3>
+                
+                <div class="duracao-info">
+                    <p><strong>Duração total do agendamento:</strong> <span id="duracaoTotal">30</span> minutos</p>
+                </div>
+
+                <h4>Horários Disponíveis:</h4>
+                <div class="horarios-grid" id="horariosGrid">
+                    <!-- Os horários serão gerados por JavaScript -->
+                </div>
+
+                <div class="horarios-buttons">
+                    <button class="btn-voltar-datas" id="btnVoltarDatas">Voltar às Datas</button>
+                    <button class="btn-finalizar-horario" id="btnFinalizarHorario">Finalizar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Resumo do Agendamento -->
+    <section id="resumo" class="resumo-section">
+        <div class="resumo-container">
+            <h2>Resumo do Agendamento</h2>
+            
+            <div class="resumo-info">
+                <div class="resumo-item">
+                    <strong>Data:</strong>
+                    <span id="resumoData"></span>
+                </div>
+                <div class="resumo-item">
+                    <strong>Horário:</strong>
+                    <span id="resumoHorario"></span>
+                </div>
+                <div class="resumo-item">
+                    <strong>Duração:</strong>
+                    <span id="resumoDuracao"></span> minutos
+                </div>
+                <div class="resumo-item">
+                    <strong>Serviços:</strong>
+                    <ul id="resumoServicos" class="resumo-lista">
+                        <!-- Serviços serão inseridos aqui -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="resumo-buttons">
+                <button class="btn-voltar-horarios" id="btnVoltarHorarios">Voltar</button>
+                <button class="btn-confirmar-resumo" id="btnConfirmarResumo">Confirmar Agendamento</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Confirmação Final -->
+    <section id="confirmacao" class="confirmacao-section">
+        <div class="confirmacao-container">
+            <h2>Agendamento Realizado!</h2>
+            
+            <div class="confirmacao-info">
+                <div class="confirmacao-status">
+                    <i class="fas fa-clock"></i>
+                    <h3>Aguardando Confirmação do Barbeiro</h3>
+                </div>
+
+                <div class="confirmacao-details">
+                    <div class="confirmacao-item">
+                        <strong>Data:</strong>
+                        <span id="confirmacaoData"></span>
+                    </div>
+                    <div class="confirmacao-item">
+                        <strong>Horário:</strong>
+                        <span id="confirmacaoHorario"></span>
+                    </div>
+                    <div class="confirmacao-item">
+                        <strong>Duração:</strong>
+                        <span id="confirmacaoDuracao"></span> minutos
+                    </div>
+                    <div class="confirmacao-item">
+                        <strong>Serviços:</strong>
+                        <ul id="confirmacaoServicos" class="confirmacao-lista">
+                            <!-- Serviços serão inseridos aqui -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="confirmacao-buttons">
+                <button class="btn-salvar-conta" id="btnSalvarConta">Salvar em Minha Conta</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Perfil do Cliente -->
+    <section id="perfil" class="perfil-section">
+        <div class="perfil-container">
+            <div class="perfil-header">
+                <h2>Meu Perfil</h2>
+                <button class="btn-fechar-perfil" id="btnFecharPerfil">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="perfil-info">
+                <div class="info-item">
+                    <strong>Nome:</strong>
+                    <span id="perfilNome"></span>
+                </div>
+                <div class="info-item">
+                    <strong>Email:</strong>
+                    <span id="perfilEmail"></span>
+                </div>
+                <div class="info-item">
+                    <strong>Telefone:</strong>
+                    <span id="perfilTelefone"></span>
+                </div>
+            </div>
+
+            <div class="perfil-agendamentos">
+                <h3>Meus Agendamentos</h3>
+                
+                <div id="agendamentosContainer" class="agendamentos-list">
+                    <!-- Agendamentos serão listados aqui -->
+                </div>
+            </div>
+
+            <div class="perfil-buttons">
+                <button class="btn-logout" id="btnLogout">Sair da Conta</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Login/Cadastro -->
+    <section id="auth" class="auth-section">
+        <div class="auth-container">
+            <!-- Formulário de Login -->
+            <div class="auth-form" id="loginForm">
+                <h2>Faça Login</h2>
+                
+                <form id="formLogin">
+                    <div class="form-group">
+                        <label for="loginEmail">Email:</label>
+                        <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginSenha">Senha:</label>
+                        <input type="password" id="loginSenha" placeholder="Sua senha" required>
+                    </div>
+
+                    <button type="submit" class="btn-auth-submit">Entrar</button>
+                </form>
+
+                <div class="auth-switch">
+                    <p>Não tem conta? <a href="#" id="switchToCadastro">Cadastre-se aqui</a></p>
+                </div>
+            </div>
+
+            <!-- Formulário de Cadastro -->
+            <div class="auth-form" id="cadastroForm" style="display: none;">
+                <h2>Cadastre-se</h2>
+                
+                <form id="formCadastro">
+                    <div class="form-group">
+                        <label for="cadastroNome">Nome Completo:</label>
+                        <input type="text" id="cadastroNome" placeholder="Seu nome completo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cadastroTelefone">Telefone:</label>
+                        <input type="tel" id="cadastroTelefone" placeholder="(11) 99999-9999" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cadastroEmail">Email:</label>
+                        <input type="email" id="cadastroEmail" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cadastroSenha">Senha:</label>
+                        <input type="password" id="cadastroSenha" placeholder="Crie uma senha" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cadastroConfirmSenha">Confirmar Senha:</label>
+                        <input type="password" id="cadastroConfirmSenha" placeholder="Confirme sua senha" required>
+                    </div>
+
+                    <button type="submit" class="btn-auth-submit">Cadastrar</button>
+                </form>
+
+                <div class="auth-switch">
+                    <p>Já tem conta? <a href="#" id="switchToLogin">Faça login aqui</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="Assets/script.js"></script>
+</body>
+</html>

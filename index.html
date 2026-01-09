@@ -36,6 +36,9 @@
 
             <!-- Perfil do Cliente (visível quando logado) -->
             <div class="perfil-cliente" id="perfilCliente" style="display: none;">
+                <button class="btn-barbeiro" id="btnBarbeiro" style="display: none;">
+                    <i class="fas fa-crown"></i> Barbeiro
+                </button>
                 <button class="btn-perfil" id="btnPerfil">
                     <i class="fas fa-user-circle"></i>
                     <span id="nomeUsuarioPerfil"></span>
@@ -53,12 +56,23 @@
     <nav class="sidebar-menu" id="sidebarMenu">
         <a href="#inicial" class="sidebar-link">Inicio</a>
         <a href="#agende" class="sidebar-link">Agende aqui</a>
-        <a href="#horarios" class="sidebar-link">Horários</a>
         <a href="#contatos" class="sidebar-link contact-btn">Contatos</a>
-        <div class="sidebar-auth">
+        <div class="sidebar-auth" id="sidebarAuth">
             <button class="btn-sidebar-cadastro">Cadastre-se</button>
             <button class="btn-sidebar-login">Login</button>
         </div>
+        <div class="sidebar-perfil" id="sidebarPerfil" style="display: none;">
+            <div class="sidebar-perfil-info">
+                <i class="fas fa-user-circle"></i>
+                <span class="sidebar-perfil-name" id="nomeUsuarioSidebar"></span>
+            </div>
+            <button class="btn-sidebar-perfil" id="btnSidebarPerfil">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        <button class="btn-sidebar-barbeiro" id="btnSidebarBarbeiro" style="display: none;">
+            <i class="fas fa-crown"></i> Barbeiro
+        </button>
     </nav>
 
     <!-- Overlay para fechar menu -->
@@ -86,7 +100,32 @@
                 Com mais de 10 anos de experiência, Andreik se dedica a compreender o estilo de cada cliente e transformar sua visão em realidade. 
                 Na Model Barber, você não apenas recebe um corte de cabelo, mas uma experiência de excelência em beleza masculina.
             </p>
-            <a href="#agende" class="btn-agende-corte">Agende seu corte</a>
+            <a href="#" class="btn-agende-corte" onclick="mostrarSecao('selecao-barbeiro'); return false;">Agende seu corte</a>
+        </div>
+    </section>
+
+    <!-- Seção Seleção de Barbeiro -->
+    <section id="selecao-barbeiro" class="selecao-barbeiro-section">
+        <img src="Assets/img/barbearia.webp" alt="Barbearia Model Barber" class="agendamento-image">
+        <div class="agendamento-overlay"></div>
+        
+        <div class="agendamento-container">
+            <h2>Escolha seu Barbeiro</h2>
+            
+            <div class="barbeiros-disponiveis">
+                <div class="barbeiro-opcao" data-barbeiro="qualquerUm">
+                    <div class="barbeiro-opcao-icon">
+                        <i class="fas fa-random"></i>
+                    </div>
+                    <h3>Qualquer um</h3>
+                    <p>Próximo disponível</p>
+                </div>
+            </div>
+            <div id="listaBarbeirosDisponiveis"></div>
+            
+            <button id="btnContinuarAgendamento" class="btn-confirmar-agendamento" style="display: none;">
+                <i class="fas fa-arrow-right"></i> Continuar
+            </button>
         </div>
     </section>
 
@@ -102,37 +141,43 @@
                 <div class="servico-card">
                     <h3>Corte Clássico</h3>
                     <p>Corte tradicional com finalização perfeita</p>
-                    <button class="btn-selecionar" data-servico="Corte Clássico">Selecionar</button>
+                    <p class="preco">R$ 50,00</p>
+                    <button class="btn-selecionar" data-servico="Corte Clássico" data-preco="50">Selecionar</button>
                 </div>
 
                 <div class="servico-card">
                     <h3>Corte Moderno</h3>
                     <p>Corte com designs e tendências atuais</p>
-                    <button class="btn-selecionar" data-servico="Corte Moderno">Selecionar</button>
+                    <p class="preco">R$ 60,00</p>
+                    <button class="btn-selecionar" data-servico="Corte Moderno" data-preco="60">Selecionar</button>
                 </div>
 
                 <div class="servico-card">
                     <h3>Barba Completa</h3>
                     <p>Aparagem e modelagem de barba</p>
-                    <button class="btn-selecionar" data-servico="Barba Completa">Selecionar</button>
+                    <p class="preco">R$ 35,00</p>
+                    <button class="btn-selecionar" data-servico="Barba Completa" data-preco="35">Selecionar</button>
                 </div>
 
                 <div class="servico-card">
                     <h3>Corte + Barba</h3>
                     <p>Corte e barba em um único atendimento</p>
-                    <button class="btn-selecionar" data-servico="Corte + Barba">Selecionar</button>
+                    <p class="preco">R$ 80,00</p>
+                    <button class="btn-selecionar" data-servico="Corte + Barba" data-preco="80">Selecionar</button>
                 </div>
 
                 <div class="servico-card">
                     <h3>Tintura de Barba</h3>
                     <p>Coloração profissional para sua barba</p>
-                    <button class="btn-selecionar" data-servico="Tintura de Barba">Selecionar</button>
+                    <p class="preco">R$ 45,00</p>
+                    <button class="btn-selecionar" data-servico="Tintura de Barba" data-preco="45">Selecionar</button>
                 </div>
 
                 <div class="servico-card">
                     <h3>Limpeza Facial</h3>
                     <p>Limpeza e hidratação do rosto</p>
-                    <button class="btn-selecionar" data-servico="Limpeza Facial">Selecionar</button>
+                    <p class="preco">R$ 40,00</p>
+                    <button class="btn-selecionar" data-servico="Limpeza Facial" data-preco="40">Selecionar</button>
                 </div>
             </div>
 
@@ -191,6 +236,10 @@
                     <span id="resumoHorario"></span>
                 </div>
                 <div class="resumo-item">
+                    <strong>Barbeiro:</strong>
+                    <span id="resumoBarbeiro"></span>
+                </div>
+                <div class="resumo-item">
                     <strong>Duração:</strong>
                     <span id="resumoDuracao"></span> minutos
                 </div>
@@ -230,6 +279,10 @@
                         <span id="confirmacaoHorario"></span>
                     </div>
                     <div class="confirmacao-item">
+                        <strong>Barbeiro:</strong>
+                        <span id="confirmacaoBarbeiro"></span>
+                    </div>
+                    <div class="confirmacao-item">
                         <strong>Duração:</strong>
                         <span id="confirmacaoDuracao"></span> minutos
                     </div>
@@ -249,6 +302,7 @@
     </section>
 
     <!-- Seção Perfil do Cliente -->
+    <div class="perfil-overlay" id="perfilOverlay"></div>
     <section id="perfil" class="perfil-section">
         <div class="perfil-container">
             <div class="perfil-header">
@@ -348,6 +402,143 @@
 
                 <div class="auth-switch">
                     <p>Já tem conta? <a href="#" id="switchToLogin">Faça login aqui</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para Finalizar Agendamento -->
+    <div id="modalFinalizarAgendamento" class="modal-finalizacao">
+        <div class="modal-content-finalizacao">
+            <h2>Finalizar Agendamento</h2>
+            <form id="formFinalizarAgendamento">
+                <div class="form-group">
+                    <label for="quemRealizouServico">Quem realizou o serviço:</label>
+                    <select id="quemRealizouServico" required>
+                        <option value="">Selecione...</option>
+                    </select>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="btn-action btn-success">Confirmar</button>
+                    <button type="button" class="btn-action btn-danger" id="btnCancelarModalFinalizacao">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Seção de Gerenciamento de Barbeiros -->
+    <section id="barbeiro" class="barbeiro-section">
+        <div class="barbeiro-container">
+            <div class="barbeiro-header">
+                <h1>Gerenciamento de Barbeiros</h1>
+                <button class="btn-voltar-barbeiro" id="btnVoltarBarbeiro">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </button>
+            </div>
+
+            <div class="barbeiro-content">
+                <div class="barbeiro-sidebar">
+                    <button class="menu-barbeiro-btn active" data-menu="agendamentos">
+                        <i class="fas fa-calendar"></i> Agendamentos
+                    </button>
+                    <button class="menu-barbeiro-btn" data-menu="barbeiros">
+                        <i class="fas fa-users"></i> Barbeiros
+                    </button>
+                    <button class="menu-barbeiro-btn" data-menu="funcoes">
+                        <i class="fas fa-tasks"></i> Funções
+                    </button>
+                    <button class="menu-barbeiro-btn" data-menu="precos">
+                        <i class="fas fa-tag"></i> Preços
+                    </button>
+                    <button class="menu-barbeiro-btn" data-menu="servicos">
+                        <i class="fas fa-scissors"></i> Serviços
+                    </button>
+                </div>
+
+                <div class="barbeiro-main">
+                    <!-- Menu de Agendamentos -->
+                    <div class="menu-barbeiro active" id="menu-agendamentos">
+                        <h2>Agendamentos</h2>
+                        <div class="abas-agendamentos">
+                            <button class="aba-btn active" data-aba="pendentes">
+                                <i class="fas fa-hourglass-start"></i> Pendentes
+                            </button>
+                            <button class="aba-btn" data-aba="aceitos">
+                                <i class="fas fa-check"></i> Aceitos
+                            </button>
+                            <button class="aba-btn" data-aba="historico">
+                                <i class="fas fa-history"></i> Histórico
+                            </button>
+                        </div>
+                        
+                        <!-- Aba Pendentes -->
+                        <div class="conteudo-aba active" id="aba-pendentes">
+                            <div id="agendamentosPendentesContainer" class="agendamentos-container"></div>
+                        </div>
+                        
+                        <!-- Aba Aceitos -->
+                        <div class="conteudo-aba" id="aba-aceitos">
+                            <div id="agendamentosAceitosContainer" class="agendamentos-container"></div>
+                        </div>
+                        
+                        <!-- Aba Histórico -->
+                        <div class="conteudo-aba" id="aba-historico">
+                            <div class="filtro-historico">
+                                <label>Filtrar por:</label>
+                                <select id="filtroHistorico" class="form-select">
+                                    <option value="">Todos</option>
+                                    <option value="aceitos">Apenas Aceitos</option>
+                                    <option value="cancelados">Apenas Cancelados</option>
+                                </select>
+                            </div>
+                            <div id="agendamentosHistoricoContainer" class="agendamentos-container"></div>
+                        </div>
+                    </div>
+
+                    <!-- Menu de Barbeiros -->
+                    <div class="menu-barbeiro" id="menu-barbeiros">
+                        <h2>Gerenciar Barbeiros</h2>
+                        <div class="add-barbeiro">
+                            <input type="email" id="emailNovoBarbeiro" placeholder="Email do novo barbeiro">
+                            <input type="password" id="senhaNovoBarbeiro" placeholder="Senha">
+                            <input type="text" id="nomeBarbeiro" placeholder="Nome do barbeiro">
+                            <button id="btnAdicionarBarbeiro" class="btn-action btn-add">
+                                <i class="fas fa-plus"></i> Adicionar Barbeiro
+                            </button>
+                        </div>
+                        <div id="listaBarbeiros" class="lista-barbeiros"></div>
+                    </div>
+
+                    <!-- Menu de Funções -->
+                    <div class="menu-barbeiro" id="menu-funcoes">
+                        <h2>Gerenciar Funções</h2>
+                        <p style="color: #999;">Selecione um barbeiro para gerenciar suas funções</p>
+                        <div id="gerenciadorFuncoes" style="display: none;">
+                            <select id="selectBarbeiroFuncoes" class="form-select">
+                                <option value="">Selecione um barbeiro...</option>
+                            </select>
+                            <div id="funcoesBarbeiro" class="funcoes-barbeiro"></div>
+                        </div>
+                    </div>
+
+                    <!-- Menu de Preços -->
+                    <div class="menu-barbeiro" id="menu-precos">
+                        <h2>Gerenciar Preços</h2>
+                        <div id="gerenciadorPrecos" class="gerenciador-precos"></div>
+                    </div>
+
+                    <!-- Menu de Serviços -->
+                    <div class="menu-barbeiro" id="menu-servicos">
+                        <h2>Gerenciar Serviços</h2>
+                        <div class="add-servico">
+                            <input type="text" id="nomeServico" placeholder="Nome do serviço">
+                            <input type="number" id="precoServico" placeholder="Preço" step="0.01">
+                            <button id="btnAdicionarServico" class="btn-action btn-add">
+                                <i class="fas fa-plus"></i> Adicionar Serviço
+                            </button>
+                        </div>
+                        <div id="listaServicos" class="lista-servicos"></div>
+                    </div>
                 </div>
             </div>
         </div>
